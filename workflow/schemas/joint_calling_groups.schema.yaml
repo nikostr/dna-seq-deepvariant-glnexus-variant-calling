@@ -1,0 +1,17 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+description: an entry in the joint calling group sheet
+
+# columns that the config/samples.tsv file can have and which type they should be
+properties:
+  group:
+    type: string
+    description: joint calling group name/identifier
+  sample:
+    type: string
+    description: sample name/identifier
+
+# columns that the config/samples.tsv file must have to pass schema validation
+required:
+  - group
+  - sample
