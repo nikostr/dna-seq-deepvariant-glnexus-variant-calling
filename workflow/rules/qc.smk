@@ -7,7 +7,7 @@ rule fastqc:
         zip="results/report/fastqc/{sample}_fastqc.zip" # the suffix _fastqc.zip is necessary for multiqc to find the file. If not using multiqc, you are free to choose an arbitrary filename
     params: "--quiet"
     log:
-        "logs/fastqc/{sample}.log"
+        "results/logs/fastqc/{sample}.log"
     threads: 1
     wrapper:
         "0.73.0/bio/fastqc"
@@ -22,7 +22,7 @@ rule samtools_stats:
         extra="",                       # Optional: extra arguments.
         region=""      # Optional: region string.
     log:
-        "logs/samtools_stats/{sample}.log"
+        "results/logs/samtools_stats/{sample}.log"
     wrapper:
         "0.73.0/bio/samtools/stats"
 
@@ -37,6 +37,6 @@ rule multiqc:
     params:
         ""  # Optional: extra parameters for multiqc.
     log:
-        "logs/multiqc/{sample}.log"
+        "results/logs/multiqc/{sample}.log"
     wrapper:
         "0.73.0/bio/multiqc"

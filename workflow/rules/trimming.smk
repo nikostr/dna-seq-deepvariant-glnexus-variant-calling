@@ -7,7 +7,7 @@ rule fastp:
         html="results/report/fastp/{sample}.html",
         json="results/report/fastp/{sample}.json"
     log:
-        "logs/fastp/{sample}.log"
+        "results/logs/fastp/{sample}.log"
     params:
         adapters="--adapter_sequence {} --adapter_sequence_r2 {}".format(config['fastp']['adapter_r1'], config['fastp']['adapter_r2']),
         extra=config['fastp']['extra']

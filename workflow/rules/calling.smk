@@ -9,6 +9,6 @@ rule deepvariant:
         extra=config['deepvariant']['extra']
     threads: config['deepvariant']['threads']
     log:
-        "logs/deepvariant/{sample}/stdout.log"
+        "results/logs/deepvariant/{sample}/stdout.log"
     wrapper:
         "0.73.0/bio/deepvariant"

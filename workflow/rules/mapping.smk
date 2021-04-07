@@ -7,7 +7,7 @@ rule bwa_mem:
         "results/mapped/{sample}.bam",
         "results/mapped/{sample}.bam.csi",
     log:
-        "logs/bwa_mem/{sample}.log"
+        "results/logs/bwa_mem/{sample}.log"
     params:
         index="genome",
         extra=config['bwa_mem']['extra'],

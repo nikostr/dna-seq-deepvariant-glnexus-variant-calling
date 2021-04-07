@@ -2,7 +2,7 @@ rule get_genome:
     output:
         "resources/genome.fasta",
     log:
-        "logs/get-genome.log",
+        "results/logs/get-genome.log",
     params:
         species=config["ref"]["species"],
         datatype="dna",
@@ -19,7 +19,7 @@ rule bwa_index:
     output:
         multiext("resources/genome.fasta", ".amb", ".ann", ".bwt", ".pac", ".sa"),
     log:
-        "logs/bwa_index.log",
+        "results/logs/bwa_index.log",
     resources:
         mem_mb=config['bwa_index']['mem_mb'],
     cache: True
