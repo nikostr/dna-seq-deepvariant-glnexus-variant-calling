@@ -14,8 +14,8 @@ samples = pd.read_csv(config["samples"], sep="\t").set_index("sample", drop=Fals
 samples.index.names = ["sample_id"]
 validate(samples, schema="../schemas/samples.schema.yaml")
 
-# Relies on a table with columns group and sample_id
 joint_calling_groups = (pd.read_csv(config["joint_calling_groups"], sep="\t")
         .groupby('group')
         .sample_id
         .apply(list))
+validate(joint_calling_groups, schema="../schemas/joint_calling_groups.schema.yaml")
