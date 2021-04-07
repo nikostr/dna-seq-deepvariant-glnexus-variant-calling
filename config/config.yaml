@@ -1,0 +1,17 @@
+ref:
+    species: 'oat'
+    build: 1
+    release: 1
+bwa_index:
+    mem_mb: 369000
+fastp:
+    adapter_r1: ''
+    adapter_r2: ''
+    extra: '--correction'
+    threads: 2
+bwa_mem:
+    extra: ''
+    sort: 'samtools',
+    sort_order: 'coordinate'
+    sort_extra: ''
+    threads: 8
