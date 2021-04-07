@@ -33,7 +33,8 @@ rule deepvariant_gvcf:
 
 rule glnexus:
     input:
-        get_glnexus_inputs
+        gvcfs=lambda w: expand('results/individual_calls/{samples}.g.vcf.gz',
+                sample=joint_calling_groups.loc[w.joint_call_group])
     output:
         vcf='results/joint_calls/{joint_call_group}.vcf.gz'
     params:
