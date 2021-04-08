@@ -43,12 +43,3 @@ def get_trimmed_reads(wildcards):
         )
     # single end sample
     return "results/trimmed/{sample}-{unit}.fastq.gz".format(**wildcards)
-
-
-def get_sample_bams(wildcards):
-    """Get all aligned reads of given sample."""
-    return expand(
-        "results/mapped/{sample}-{unit}.sorted.bam",
-        sample=wildcards.sample,
-        unit=units.loc[wildcards.sample].unit,
-    )
