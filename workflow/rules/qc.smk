@@ -47,4 +47,4 @@ rule multiqc:
     log:
         "results/logs/multiqc.log",
     wrapper:
-        "0.59.2/bio/multiqc"
+        "0.73.0/bio/multiqc"
