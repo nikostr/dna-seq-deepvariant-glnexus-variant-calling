@@ -13,6 +13,18 @@ rule get_genome:
         "0.73.0/bio/reference/ensembl-sequence"
 
 
+rule genome_faidx:
+    input:
+        "resources/genome.fasta",
+    output:
+        "resources/genome.fasta.fai",
+    log:
+        "logs/genome-faidx.log",
+    cache: True
+    wrapper:
+        "0.73.0/bio/samtools/faidx"
+
+
 rule bwa_index:
     input:
         "resources/genome.fasta",
