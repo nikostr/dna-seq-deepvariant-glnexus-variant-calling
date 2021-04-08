@@ -29,22 +29,6 @@ rule samtools_stats:
 
 rule multiqc:
     input:
-        rules.fastqc.output.zip,
-        rules.samtools_stats.output,
-        rules.fastp_se.output.json,
-        rules.fastp_pe.output.json,
-    output:
-        "results/qc/multiqc/{sample}.html"
-    params:
-        ""  # Optional: extra parameters for multiqc.
-    log:
-        "results/logs/multiqc/{sample}.log"
-    wrapper:
-        "0.73.0/bio/multiqc"
-
-
-rule multiqc:
-    input:
         expand(
             [
                 "results/qc/samtools-stats/{u.sample}.txt",
