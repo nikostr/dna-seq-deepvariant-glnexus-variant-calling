@@ -1,5 +1,6 @@
 from snakemake.utils import validate
 import pandas as pd
+import os
 
 # this container defines the underlying OS for each job when using the workflow
 # with --use-conda --use-singularity
@@ -31,3 +32,23 @@ def get_fastq(wildcards):
     if len(fastqs) == 2:
         return {"sample": [fastqs.fq1, fastqs.fq2]}
     return {"sample": [fastqs.fq1]}
+
+
+def get_trimmed_reads(wildcards):
+    """Get trimmed reads of given sample-unit."""
+    if not gatk.is_single_end(**wildcards):
+        # paired-end sample
+        return expand(
+            "results/trimmed/{sample}-{unit}.{group}.fastq.gz", group=[1, 2], **wildcards
+        )
+    # single end sample
+    return "results/trimmed/{sample}-{unit}.fastq.gz".format(**wildcards)
+
+
+def get_sample_bams(wildcards):
+    """Get all aligned reads of given sample."""
+    return expand(
+        "results/mapped/{sample}-{unit}.sorted.bam",
+        sample=wildcards.sample,
+        unit=units.loc[wildcards.sample].unit,
+    )
