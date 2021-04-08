@@ -1,6 +1,7 @@
 rule deepvariant:
     input:
-        bam="results/mapped/{sample}.bam",
+        bam=rules.samtools_merge.output,
+        idx=rules.samtools_index.output,
         ref="resources/genome.fasta"
     output:
         vcf="results/calls/{sample}.vcf.gz"
@@ -16,7 +17,8 @@ rule deepvariant:
 
 rule deepvariant_gvcf:
     input:
-        bam="results/mapped/{sample}.bam",
+        bam=rules.samtools_merge.output,
+        idx=rules.samtools_index.output,
         ref="resources/genome.fasta"
     output:
         vcf=temp("results/individual_calls/{sample}.vcf.gz"),
