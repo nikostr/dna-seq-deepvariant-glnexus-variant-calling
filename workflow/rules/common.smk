@@ -14,8 +14,10 @@ samples = pd.read_csv(config["samples"], sep="\t").set_index("sample", drop=Fals
 samples.index.names = ["sample_id"]
 validate(samples, schema="../schemas/samples.schema.yaml")
 
-joint_calling_groups = (pd.read_csv(config["joint_calling_groups"], sep="\t")
+joint_calling_groups = pd.read_csv(config["joint_calling_groups"], sep="\t")
+validate(joint_calling_groups, schema="../schemas/joint_calling_groups.schema.yaml")
+# List of samples for each joint calling group
+joint_calling_group_lists = (joint_calling_groups
         .groupby('group')
         .sample_id
         .apply(list))
-validate(joint_calling_groups, schema="../schemas/joint_calling_groups.schema.yaml")
