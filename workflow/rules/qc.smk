@@ -31,7 +31,7 @@ rule multiqc:
     input:
         expand(
             [
-                "results/qc/samtools-stats/{u.sample_id}.txt",
+                "results/qc/samtools_stats/{u.sample_id}.txt",
                 "results/qc/fastqc/{u.sample_id}-{u.unit}.zip",
                 "results/qc/fastp/{u.sample_id}-{u.unit}.json",
             ],
