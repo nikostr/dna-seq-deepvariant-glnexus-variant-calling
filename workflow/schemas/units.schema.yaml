@@ -4,7 +4,7 @@ description: an entry in the sample sheet
 
 # columns that the config/samples.tsv file can have and which type they should be
 properties:
-  sample:
+  sample_id:
     type: string
     description: sample name/identifier
   unit:
@@ -19,7 +19,6 @@ properties:
 
 # columns that the config/samples.tsv file must have to pass schema validation
 required:
-  - sample
+  - sample_id
   - unit
   - fq1
-  - fq2

@@ -11,9 +11,16 @@ singularity: "docker://continuumio/miniconda3"
 configfile: "config/config.yaml"
 validate(config, schema="../schemas/config.schema.yaml")
 
-samples = pd.read_csv(config["samples"], sep="\t").set_index("sample", drop=False)
-samples.index.names = ["sample_id"]
+samples = pd.read_table(config["samples"]).set_index("sample_id", drop=False)
 validate(samples, schema="../schemas/samples.schema.yaml")
+
+units = pd.read_table(config["units"], dtype=str).set_index(
+    ["sample_id", "unit"], drop=False
+)
+units.index = units.index.set_levels(
+    [i.astype(str) for i in units.index.levels]
+)  # enforce str in index
+validate(units, schema="../schemas/units.schema.yaml")
 
 joint_calling_groups = pd.read_csv(config["joint_calling_groups"], sep="\t")
 validate(joint_calling_groups, schema="../schemas/joint_calling_groups.schema.yaml")
