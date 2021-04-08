@@ -7,7 +7,19 @@ properties:
   sample:
     type: string
     description: sample name/identifier
+  unit:
+    type: string
+    description: unit name/identifier
+  fq1:
+    type: string
+    description: fastq file location
+  fq2:
+    type: string
+    description: fastq file location for PE reads
 
 # columns that the config/samples.tsv file must have to pass schema validation
 required:
   - sample
+  - unit
+  - fq1
+  - fq2
