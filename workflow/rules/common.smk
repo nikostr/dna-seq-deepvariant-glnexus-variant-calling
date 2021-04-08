@@ -27,7 +27,7 @@ joint_calling_group_lists = (joint_calling_groups
 ## Helper functions
 
 def get_fastq(wildcards):
-   """Get fastq files of given sample-unit."""
+    """Get fastq files of given sample-unit."""
     fastqs = units.loc[(wildcards.sample, wildcards.unit), ["fq1", "fq2"]].dropna()
     if len(fastqs) == 2:
         return {"sample": [fastqs.fq1, fastqs.fq2]}

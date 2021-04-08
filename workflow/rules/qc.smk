@@ -1,7 +1,7 @@
 rule fastqc:
     input:
         #"reads/{sample}.fastq"
-        get_fastqc_input
+        unpack(get_fastq)
     output:
         html="results/report/fastqc/{sample}.html",
         zip="results/report/fastqc/{sample}_fastqc.zip" # the suffix _fastqc.zip is necessary for multiqc to find the file. If not using multiqc, you are free to choose an arbitrary filename
@@ -15,7 +15,7 @@ rule fastqc:
 
 rule samtools_stats:
     input:
-        rules.bwa_mem.output
+        rules.samtools_merge.output
     output:
         "results/report/samtools_stats/{sample}.txt"
     params:
@@ -31,7 +31,8 @@ rule multiqc:
     input:
         rules.fastqc.output.zip,
         rules.samtools_stats.output,
-        rules.fastp.output.json
+        rules.fastp_se.output.json,
+        rules.fastp_pe.output.json,
     output:
         "results/report/multiqc/{sample}.html"
     params:

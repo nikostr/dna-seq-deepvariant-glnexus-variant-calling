@@ -43,7 +43,7 @@ rule glnexus:
         config=config['glnexus']['config']
     threads: config['glnexus']['threads']
     log:
-        'results/logs/glnexus/{sample}/stdout.log'
+        'results/logs/glnexus/{joint_calling_group}/stdout.log'
     wrapper:
         ''
 
@@ -54,7 +54,7 @@ rule bcftools_index:
     output:
         "{vcffile}.vcf.gz.csi"
     params:
-        extra=config['bcftools_index']['extra'] + ' --threads {} '.format(config['bcftools_index']['threads']  # optional parameters for bcftools index
+        extra=config['bcftools_index']['extra'] + ' --threads {}'.format(config['bcftools_index']['threads'])  # optional parameters for bcftools index
     threads: config['bcftools_index']['threads']
     wrapper:
         "0.73.0/bio/bcftools/index"
@@ -64,20 +64,20 @@ rule bcftools_merge:
     input:
         calls=[
             *expand("results/calls/{sample}.vcf.gz", sample=(samples
-                .query('~ sample.isin(@joint_calling_groups.sample)'))),
+                .query('~ sample.isin(@joint_calling_groups.sample_id)'))),
             *expand('results/joint_calls/{joint_calling_group}.vcf.gz',
                 joint_calling_group=joint_calling_group_lists.index)
             ],
         idxs=[
             *expand("results/calls/{sample}.vcf.gz.csi", sample=(samples
-                .query('~ sample.isin(@joint_calling_groups.sample)'))),
+                .query('~ sample.isin(@joint_calling_groups.sample_id)'))),
             *expand('results/joint_calls/{joint_calling_group}.vcf.gz.csi',
                 joint_calling_group=joint_calling_group_lists.index)
             ]
     output:
         "results/merged_calls/all.bcf"
     params:
-        config['bcftools_merge']['options']  # optional parameters for bcftools concat (except -o)
+        config['bcftools_merge']['params']  # optional parameters for bcftools concat (except -o)
     wrapper:
         "0.73.0/bio/bcftools/merge"
 

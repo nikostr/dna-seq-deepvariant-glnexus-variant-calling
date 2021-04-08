@@ -1,13 +1,13 @@
 rule map_reads:
     input:
-        reads=get_trimmed_reads
+        reads=get_trimmed_reads,
         idx=rules.bwa_index.output
         #add index dependecy as in https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/blob/master/rules/mapping.smk
     output:
         temp("results/mapped/{sample}-{unit}.sorted.bam"),
         temp("results/mapped/{sample}-{unit}.bam.csi"),
     log:
-        "results/logs/bwa_mem/{sample}.log"
+        "results/logs/bwa_mem/{sample}-{unit}.log"
     params:
         index=lambda w, input: os.path.splitext(input.idx[0])[0],
         extra=config['bwa_mem']['extra'],

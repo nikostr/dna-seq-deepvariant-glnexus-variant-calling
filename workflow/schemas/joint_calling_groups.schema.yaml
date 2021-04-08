@@ -7,11 +7,11 @@ properties:
   group:
     type: string
     description: joint calling group name/identifier
-  sample:
+  sample_id:
     type: string
     description: sample name/identifier
 
 # columns that the config/samples.tsv file must have to pass schema validation
 required:
   - group
-  - sample
+  - sample_id

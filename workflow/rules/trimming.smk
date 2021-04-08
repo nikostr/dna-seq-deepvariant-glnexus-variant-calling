@@ -25,7 +25,7 @@ rule fastp_pe:
     log:
         "results/logs/fastp/{sample}-{unit}.log"
     params:
-        adapters=config['fastp_pe']['adapter']),
+        adapters=config['fastp_pe']['adapter'],
         extra=config['fastp_pe']['extra']
     threads: config['fastp_pe']['threads']
     wrapper:
