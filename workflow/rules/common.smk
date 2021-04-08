@@ -30,7 +30,6 @@ joint_calling_group_lists = (joint_calling_groups
         .sample_id
         .apply(list))
 
-
 ## Helper functions
 
 def get_fastq(wildcards):
@@ -41,9 +40,14 @@ def get_fastq(wildcards):
     return {"sample": [fastqs.fq1]}
 
 
+def is_single_end(sample, unit):
+    """Return True if sample-unit is single end."""
+    return pd.isnull(units.loc[(sample, unit), "fq2"])
+
+
 def get_trimmed_reads(wildcards):
     """Get trimmed reads of given sample-unit."""
-    if not gatk.is_single_end(**wildcards):
+    if not is_single_end(**wildcards):
         # paired-end sample
         return expand(
             "results/trimmed/{sample}-{unit}.{group}.fastq.gz", group=[1, 2], **wildcards

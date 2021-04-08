@@ -35,7 +35,7 @@ rule deepvariant_gvcf:
 
 rule glnexus:
     input:
-        gvcfs=lambda w: expand('results/individual_calls/{samples}.g.vcf.gz',
+        gvcfs=lambda w: expand('results/individual_calls/{sample}.g.vcf.gz',
                 sample=joint_calling_group_lists.loc[w.joint_calling_group])
     output:
         vcf='results/joint_calls/{joint_calling_group}.vcf.gz'
@@ -64,13 +64,15 @@ rule bcftools_merge:
     input:
         calls=[
             *expand("results/calls/{sample}.vcf.gz", sample=(samples
-                .query('~ sample.isin(@joint_calling_groups.sample_id)'))),
+                .query('~ sample_id.isin(@joint_calling_groups.sample_id)')
+                .index)),
             *expand('results/joint_calls/{joint_calling_group}.vcf.gz',
                 joint_calling_group=joint_calling_group_lists.index)
             ],
         idxs=[
             *expand("results/calls/{sample}.vcf.gz.csi", sample=(samples
-                .query('~ sample.isin(@joint_calling_groups.sample_id)'))),
+                .query('~ sample_id.isin(@joint_calling_groups.sample_id)')
+                .index)),
             *expand('results/joint_calls/{joint_calling_group}.vcf.gz.csi',
                 joint_calling_group=joint_calling_group_lists.index)
             ]

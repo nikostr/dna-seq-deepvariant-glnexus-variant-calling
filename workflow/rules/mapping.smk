@@ -18,7 +18,6 @@ rule map_reads:
     wrapper:
         "0.73.0/bio/bwa/mem"
 
-
 rule samtools_merge:
     input:
         lambda w: expand(

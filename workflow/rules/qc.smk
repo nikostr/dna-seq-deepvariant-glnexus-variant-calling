@@ -31,9 +31,9 @@ rule multiqc:
     input:
         expand(
             [
-                "results/qc/samtools-stats/{u.sample}.txt",
-                "results/qc/fastqc/{u.sample}-{u.unit}.zip",
-                "results/qc/fastp/{u.sample}-{u.unit}.json",
+                "results/qc/samtools-stats/{u.sample_id}.txt",
+                "results/qc/fastqc/{u.sample_id}-{u.unit}.zip",
+                "results/qc/fastp/{u.sample_id}-{u.unit}.json",
             ],
             u=units.itertuples(),
         ),

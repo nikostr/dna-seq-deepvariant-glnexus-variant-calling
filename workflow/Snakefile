@@ -18,9 +18,6 @@ rule all:
         # Subsequent target rules can be specified below. They should start with all_*.
 
 
-module gatk:
-    snakefile: "https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/tree/v2.0.1"
-
 include: "rules/common.smk"
 include: "rules/ref.smk"
 include: "rules/trimming.smk"
