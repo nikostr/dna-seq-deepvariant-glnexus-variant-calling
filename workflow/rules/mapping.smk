@@ -5,7 +5,7 @@ rule map_reads:
         #add index dependecy as in https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/blob/master/rules/mapping.smk
     output:
         temp("results/mapped/{sample}-{unit}.sorted.bam"),
-        temp("results/mapped/{sample}-{unit}.bam.csi"),
+        temp("results/mapped/{sample}-{unit}.sorted.bam.csi"),
     log:
         "results/logs/bwa_mem/{sample}-{unit}.log"
     params:
@@ -13,10 +13,12 @@ rule map_reads:
         extra=config['bwa_mem']['extra'],
         sort=config['bwa_mem']['sort'],             # Can be 'none', 'samtools' or 'picard'.
         sort_order=config['bwa_mem']['sort_order'],  # Can be 'queryname' or 'coordinate'.
-        sort_extra=config['bwa_mem']['sort_extra'] + ' --write-index'            # Extra args for samtools/picard.
+        sort_extra=config['bwa_mem']['sort_extra'],            # Extra args for samtools/picard.
+        write_index=True
     threads: config['bwa_mem']['threads']
     wrapper:
-        "0.73.0/bio/bwa/mem"
+        "file:///home/nikos/src/snakemake-wrappers/bio/bwa/mem"
+        #"0.73.0/bio/bwa/mem"
 
 rule samtools_merge:
     input:

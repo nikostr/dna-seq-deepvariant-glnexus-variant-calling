@@ -2,7 +2,8 @@ rule deepvariant:
     input:
         bam=rules.samtools_merge.output,
         idx=rules.samtools_index.output,
-        ref="resources/genome.fasta"
+        ref=rules.get_genome.output,
+        ref_idx=rules.genome_faidx.output
     output:
         vcf="results/calls/{sample}.vcf.gz"
     params:
@@ -12,14 +13,16 @@ rule deepvariant:
     log:
         "results/logs/deepvariant/{sample}/stdout.log"
     wrapper:
-        "0.73.0/bio/deepvariant"
+        "file:///home/nikos/src/snakemake-wrappers/bio/deepvariant"
+        #"0.73.0/bio/deepvariant"
 
 
 rule deepvariant_gvcf:
     input:
         bam=rules.samtools_merge.output,
         idx=rules.samtools_index.output,
-        ref="resources/genome.fasta"
+        ref=rules.get_genome.output,
+        ref_idx=rules.genome_faidx.output
     output:
         vcf=temp("results/individual_calls/{sample}.vcf.gz"),
         gvcf=temp("results/individual_calls/{sample}.g.vcf.gz")
@@ -30,7 +33,8 @@ rule deepvariant_gvcf:
     log:
         "results/logs/deepvariant_gvcf/{sample}/stdout.log"
     wrapper:
-        "0.73.0/bio/deepvariant"
+        "file:///home/nikos/src/snakemake-wrappers/bio/deepvariant"
+        #"0.73.0/bio/deepvariant"
 
 
 rule glnexus:
