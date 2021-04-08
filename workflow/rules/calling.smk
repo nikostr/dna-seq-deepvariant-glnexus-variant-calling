@@ -1,6 +1,6 @@
 rule deepvariant:
     input:
-        bam=rules.samtools_merge.output,
+        bam=rules.samtools_merge.output[0],
         idx=rules.samtools_index.output,
         ref=rules.get_genome.output,
         ref_idx=rules.genome_faidx.output
@@ -19,7 +19,7 @@ rule deepvariant:
 
 rule deepvariant_gvcf:
     input:
-        bam=rules.samtools_merge.output,
+        bam=rules.samtools_merge.output[0],
         idx=rules.samtools_index.output,
         ref=rules.get_genome.output,
         ref_idx=rules.genome_faidx.output
