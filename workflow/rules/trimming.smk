@@ -1,12 +1,12 @@
 rule fastp_se:
     input:
-        sample=gatk.get_fastp_input
+        unpack(get_fastq)
     output:
-        trimmed="results/trimmed/se/{sample}-{unit}.fastq",
-        html="results/report/fastp/se/{sample}-{unit}.html",
-        json="results/report/fastp/se/{sample}-{unit}.json"
+        trimmed="results/trimmed/{sample}-{unit}.fastq.gz",
+        html="results/report/fastp/{sample}-{unit}.html",
+        json="results/report/fastp/{sample}-{unit}.json"
     log:
-        "results/logs/fastp/se/{sample}-{unit}.log"
+        "results/logs/fastp/{sample}-{unit}.log"
     params:
         adapters=config['fastp_se']['adapter'],
         extra=config['fastp_se']['extra']
@@ -17,13 +17,13 @@ rule fastp_se:
 
 rule fastp_pe:
     input:
-        sample=gatk.get_fastp_input
+        unpack(get_fastq)
     output:
-        trimmed=["results/trimmed/pe/{sample}-{unit}.1.fastq", "results/trimmed/pe/{sample}-{unit}.2.fastq"],
-        html="results/report/fastp/pe/{sample}-{unit}.html",
-        json="results/report/fastp/pe/{sample}-{unit}.json"
+        trimmed=["results/trimmed/{sample}-{unit}.1.fastq.gz", "results/trimmed/{sample}-{unit}.2.fastq.gz"],
+        html="results/report/fastp/{sample}-{unit}.html",
+        json="results/report/fastp/{sample}-{unit}.json"
     log:
-        "results/logs/fastp/pe/{sample}-{unit}.log"
+        "results/logs/fastp/{sample}-{unit}.log"
     params:
         adapters=config['fastp_pe']['adapter']),
         extra=config['fastp_pe']['extra']
