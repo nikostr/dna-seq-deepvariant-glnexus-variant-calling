@@ -19,7 +19,7 @@ rule genome_faidx:
     output:
         "resources/genome.fasta.fai",
     log:
-        "logs/genome-faidx.log",
+        "results/logs/genome-faidx.log",
     cache: True
     wrapper:
         "0.73.0/bio/samtools/faidx"
