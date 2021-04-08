@@ -3,8 +3,8 @@ rule fastp_se:
         unpack(get_fastq)
     output:
         trimmed="results/trimmed/{sample}-{unit}.fastq.gz",
-        html="results/report/fastp/{sample}-{unit}.html",
-        json="results/report/fastp/{sample}-{unit}.json"
+        html="results/qc/fastp/{sample}-{unit}.html",
+        json="results/qc/fastp/{sample}-{unit}.json"
     log:
         "results/logs/fastp/{sample}-{unit}.log"
     params:
@@ -20,8 +20,8 @@ rule fastp_pe:
         unpack(get_fastq)
     output:
         trimmed=["results/trimmed/{sample}-{unit}.1.fastq.gz", "results/trimmed/{sample}-{unit}.2.fastq.gz"],
-        html="results/report/fastp/{sample}-{unit}.html",
-        json="results/report/fastp/{sample}-{unit}.json"
+        html="results/qc/fastp/{sample}-{unit}.html",
+        json="results/qc/fastp/{sample}-{unit}.json"
     log:
         "results/logs/fastp/{sample}-{unit}.log"
     params:
