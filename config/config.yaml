@@ -1,46 +1,58 @@
 samples: 'samples.tsv'
 units: '.test/units.tsv'
 joint_calling_groups: '.test/joint_calling_groups.tsv'
+
 ref:
     species: 'oat'
     build: 1
     release: 1
+
 bwa_index:
     mem_mb: 369000
+
 fastp_se:
     adapter: ''
     extra: '--correction'
     threads: 2
+
 fastp_pe:
     adapter: ''
     extra: '--correction'
     threads: 2
+
 bwa_mem:
     extra: ''
     sort: 'samtools'
     sort_order: 'coordinate'
     sort_extra: ''
     threads: 8
+
 samtools_merge:
     params: ''
     threads: 8
+
 samtools_index:
     params: ''
+
 deepvariant:
     model: 'wgs'
     extra: ''
     params: ''
     threads: 8
+
 deepvariant_gvcf:
     model: 'wgs'
     extra: ''
     params: ''
     threads: 8
+
 glnexus:
     config: 'DeepVariantWGS'
     threads: 8
+
 bcftools_index:
     extra: ''
     threads: 8
+
 bcftools_merge:
-    params: ''
+    params: '--force-samples'
