@@ -57,7 +57,7 @@ rule glnexus:
         '--dir {output.scratch} '
         '--threads {threads} '
         '{input} '
-        '2> {log.glnexus} '
+        '2> {log} '
         '| bcftools view - '
         '| bgzip -c '
         '> {output.vcf} '
