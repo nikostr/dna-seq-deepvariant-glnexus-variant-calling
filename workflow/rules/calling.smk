@@ -42,14 +42,25 @@ rule glnexus:
         gvcfs=lambda w: expand('results/individual_calls/{sample}.g.vcf.gz',
                 sample=joint_calling_group_lists.loc[w.joint_calling_group])
     output:
-        vcf='results/joint_calls/{joint_calling_group}.vcf.gz'
+        vcf='results/joint_calls/{joint_calling_group}.vcf.gz',
+        scratch=temp(directory('results/joint_calls/{joint_calling_group}.DB'))
     params:
         config=config['glnexus']['config']
     threads: config['glnexus']['threads']
     log:
         'results/logs/glnexus/{joint_calling_group}/stdout.log'
-    wrapper:
-        ''
+    container:
+        'docker://quay.io/mlin/glnexus:v1.3.1'
+    shell:
+        '/usr/local/bin/glnexus_cli '
+        '--config DeepVariantWGS '
+        '--dir {output.scratch} '
+        '--threads {threads} '
+        '{input} '
+        '2> {log.glnexus} '
+        '| bcftools view - '
+        '| bgzip -c '
+        '> {output.vcf} '
 
 
 rule bcftools_index:
