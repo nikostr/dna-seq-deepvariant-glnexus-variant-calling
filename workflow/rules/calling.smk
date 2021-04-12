@@ -102,3 +102,9 @@ rule bcftools_merge:
 # Samples that are not jointly called are added as is
 # Samples that are jointly called once are also added as is
 # Samples that are jointly called several times are also called one additional time using all samples it is jointly called with, and this result is used
+
+# Some ways to handle this
+# Keep all samples, let users sort how to handle samples present in more than one group themselves (no additional work, but good if gvcf file not temporary in that case)
+# For samples belonging to more than one group, drop from joint, use plain vcf (could add additional glnexus rule for this, filter in bcftools view)
+# Add column to joint_calling_groups.tsv, where users specify which samples to keep
+# Probably best to let users decide which samples are jointly called, and in case there are samples in multiple groups, manually specify which should be removed
