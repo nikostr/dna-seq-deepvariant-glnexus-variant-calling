@@ -28,18 +28,9 @@ rule samtools_merge:
                 unit=units.loc[w.sample].unit
                 )
     output:
-        "results/mapped/{sample}.bam"
-    params: config['samtools_merge']['params'] # optional additional parameters as string
+        bam="results/mapped/{sample}.bam",
+        idx="results/mapped/{sample}.bam.csi",
+    params: config['samtools_merge']['params'] + ' --write-index' # optional additional parameters as string
     threads: config['samtools_merge']['threads'] # Samtools takes additional threads through its option -@
     wrapper:
         "0.73.0/bio/samtools/merge"
-
-
-rule samtools_index:
-    input:
-        "results/mapped/{sample}.bam"
-    output:
-        "results/mapped/{sample}.bam.csi"
-    params: config['samtools_index']['params'] + ' -c '# optional params string
-    wrapper:
-        "0.73.0/bio/samtools/index"
