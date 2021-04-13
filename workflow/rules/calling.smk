@@ -42,7 +42,7 @@ rule glnexus:
         gvcfs=lambda w: expand('results/individual_calls/{sample}.g.vcf.gz',
                 sample=joint_calling_group_lists.loc[w.joint_calling_group])
     output:
-        vcf=tmp('results/all_group_samples_joint_calls/{joint_calling_group}.vcf.gz'),
+        vcf=temp('results/all_group_samples_joint_calls/{joint_calling_group}.vcf.gz'),
         scratch=temp(directory('results/all_group_samples_joint_calls/{joint_calling_group}.DB'))
     params:
         config=config['glnexus']['config']
