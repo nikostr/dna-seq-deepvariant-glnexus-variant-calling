@@ -60,7 +60,7 @@ def get_trimmed_reads(wildcards):
 def get_joint_calling_group_samples(wildcards):
     samples = ','.join(joint_calling_groups
             .loc[lambda x: (x.group==wildcards.joint_calling_group)
-                & (x.keep==1) ]
+                & x.keep ]
             .sample_id
             .to_list())
     return '--samples {} '.format(samples)
