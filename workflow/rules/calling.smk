@@ -24,8 +24,8 @@ rule deepvariant_gvcf:
         ref=rules.get_genome.output,
         ref_idx=rules.genome_faidx.output
     output:
-        vcf=temp("results/individual_calls/{sample}.vcf.gz"),
-        gvcf=temp("results/individual_calls/{sample}.g.vcf.gz")
+        vcf="results/individual_calls/{sample}.vcf.gz",
+        gvcf="results/individual_calls/{sample}.g.vcf.gz"
     params:
         model=config['deepvariant_gvcf']['model'],
         extra=config['deepvariant_gvcf']['extra']
@@ -42,8 +42,8 @@ rule glnexus:
         gvcfs=lambda w: expand('results/individual_calls/{sample}.g.vcf.gz',
                 sample=joint_calling_group_lists.loc[w.joint_calling_group])
     output:
-        vcf='results/joint_calls/{joint_calling_group}.vcf.gz',
-        scratch=temp(directory('results/joint_calls/{joint_calling_group}.DB'))
+        vcf=tmp('results/all_group_samples_joint_calls/{joint_calling_group}.vcf.gz'),
+        scratch=temp(directory('results/all_group_samples_joint_calls/{joint_calling_group}.DB'))
     params:
         config=config['glnexus']['config']
     threads: config['glnexus']['threads']
@@ -75,18 +75,30 @@ rule bcftools_index:
         "0.73.0/bio/bcftools/index"
 
 
+rule remove_duplicate_samples:
+    input:
+        vcf=rules.glnexus.output.vcf
+    output:
+        vcf='results/joint_calls/{joint_calling_group}.vcf.gz',
+    params:
+        extra=get_joint_calling_group_samples
+    threads: config['bcftools_index']['threads']
+    wrapper:
+        "0.73.0/bio/bcftools/view"
+
+
 rule bcftools_merge:
     input:
         calls=[
             *expand("results/calls/{sample}.vcf.gz", sample=(samples
-                .loc[~ samples.sample_id.isin(joint_calling_groups.sample_id)]
+                .loc[~ samples.sample_id.isin(joint_calling_groups.query('keep==1').sample_id)]
                 .index)),
             *expand('results/joint_calls/{joint_calling_group}.vcf.gz',
                 joint_calling_group=joint_calling_group_lists.index)
             ],
         idxs=[
             *expand("results/calls/{sample}.vcf.gz.csi", sample=(samples
-                .loc[~ samples.sample_id.isin(joint_calling_groups.sample_id)]
+                .loc[~ samples.sample_id.isin(joint_calling_groups.query('keep==1').sample_id)]
                 .index)),
             *expand('results/joint_calls/{joint_calling_group}.vcf.gz.csi',
                 joint_calling_group=joint_calling_group_lists.index)
@@ -97,14 +109,3 @@ rule bcftools_merge:
         config['bcftools_merge']['params']  # optional parameters for bcftools concat (except -o)
     wrapper:
         "0.73.0/bio/bcftools/merge"
-
-# Maybe merge by the following logic:
-# Samples that are not jointly called are added as is
-# Samples that are jointly called once are also added as is
-# Samples that are jointly called several times are also called one additional time using all samples it is jointly called with, and this result is used
-
-# Some ways to handle this
-# Keep all samples, let users sort how to handle samples present in more than one group themselves (no additional work, but good if gvcf file not temporary in that case)
-# For samples belonging to more than one group, drop from joint, use plain vcf (could add additional glnexus rule for this, filter in bcftools view)
-# Add column to joint_calling_groups.tsv, where users specify which samples to keep
-# Probably best to let users decide which samples are jointly called, and in case there are samples in multiple groups, manually specify which should be removed

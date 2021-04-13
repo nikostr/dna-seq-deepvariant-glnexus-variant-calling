@@ -31,26 +31,6 @@ joint_calling_group_lists = (joint_calling_groups
         .sample_id
         .apply(set))
 
-# jcg logic
-# for each sample present in more than two calling groups
-# find the union of the calling groups they are present in
-# and do joint calling on these
-merged_joint_calling_groups = (joint_calling_groups
-        .groupby('sample_id')
-        .group
-        .apply(set)
-        .reset_index()
-        .assign(n=lambda x: x.group.str.len())
-        .query('n>2')
-        .drop('n', axis=1)
-        .assign(sample_set=lambda x: (x.
-            .group
-            .apply(lambda y: (joint_calling_groups
-                .loc[joint_calling_groups.isin(y), 'sample_id']))
-            .agg(set, axis=1)
-            .apply(lambda y: y - {np.nan})))
-        )
-
 ## Helper functions
 
 def get_fastq(wildcards):
@@ -75,3 +55,14 @@ def get_trimmed_reads(wildcards):
         )
     # single end sample
     return "results/trimmed/{sample}-{unit}.fastq.gz".format(**wildcards)
+
+
+def get_joint_calling_group_samples(wildcards):
+    samples = ','.join(joint_calling_groups
+            .loc[lambda x: (x.group==wildcards.joint_calling_group)
+                & (x.keep==1) ]
+            .sample_id
+            .to_list())
+    return '--samples {} '.format(samples)
+
+
