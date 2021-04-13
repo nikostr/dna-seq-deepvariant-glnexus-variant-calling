@@ -10,8 +10,12 @@ properties:
   sample_id:
     type: string
     description: sample name/identifier
+  keep:
+    type: boolean
+    description: should sample be included in GLnexus output?
 
 # columns that the config/samples.tsv file must have to pass schema validation
 required:
   - group
   - sample_id
+  - keep
