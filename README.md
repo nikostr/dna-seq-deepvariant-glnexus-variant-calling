@@ -27,7 +27,7 @@ Configure the workflow according to your needs via editing the files in the `con
 
 - `sample.tsv` lists the samples.
 - `units.tsv` lists the read sets for each sample, with one set of reads for each `sample_id-unit`. Note that `sample_id-unit` combinations should be unique.
-- `joint_calling_groups.tsv` groups samples for joint calling. The `keep` column indicates whether the sample should be kept in the final GLnexus output file and subsequently merged into `all.bcf`. Reasons for wanting to exclude a sample might be that it is used in several separate joint calling groups, but that only one of these should be included in the final output.
+- `joint_calling_groups.tsv` groups samples for joint calling. Note that jointly called samples will be named with the format `group:sample_id` in the GLnexus output and in the final `all.bcf` file.
 
 ### Step 3: Install Snakemake
 
