@@ -16,7 +16,8 @@ rule map_reads:
         sort_extra=config['bwa_mem']['sort_extra'] + ' --write-index',            # Extra args for samtools/picard.
     threads: config['bwa_mem']['threads']
     wrapper:
-        "file:///home/nikos/src/snakemake-wrappers/bio/bwa/mem"
+        'https://github.com/nikostr/snakemake-wrappers/raw/master/bio/bwa/mem'
+        #"file:///home/nikos/src/snakemake-wrappers/bio/bwa/mem"
         #"0.73.0/bio/bwa/mem"
 
 rule samtools_merge:
