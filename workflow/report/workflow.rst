@@ -1,1 +1,1 @@
-This workflow takes raw reads, and performs the steps necessary to call variants using DeepVariant and GLnexus. The latest version of this workflow can be found [here](https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling).
+This workflow takes raw reads, and performs the steps necessary to call variants using DeepVariant and GLnexus. The latest version of this workflow can be found `here <https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling>`_.
