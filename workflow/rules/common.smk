@@ -55,14 +55,3 @@ def get_trimmed_reads(wildcards):
         )
     # single end sample
     return "results/trimmed/{sample}-{unit}.fastq.gz".format(**wildcards)
-
-
-def get_joint_calling_group_samples(wildcards):
-    samples = ','.join(joint_calling_groups
-            .loc[lambda x: (x.group==wildcards.joint_calling_group)
-                & x.keep ]
-            .sample_id
-            .to_list())
-    return '--samples {} '.format(samples)
-
-

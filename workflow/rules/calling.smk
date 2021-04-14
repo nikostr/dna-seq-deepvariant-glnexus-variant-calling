@@ -75,16 +75,29 @@ rule bcftools_index:
         "0.73.0/bio/bcftools/index"
 
 
-rule remove_duplicate_samples:
+rule create_reheader_sample_file:
     input:
-        vcf=rules.glnexus.output.vcf
+        joint_calling_groups=config['joint_calling_groups']
+    output:
+        samples=temp('results/joint_calls/{joint_calling_group}_sample_names.tsv')
+    run:
+        (joint_calling_groups
+                .assign(group_sample=lambda x: x.group + ':' + x.sample_id)
+                .loc[:, ['sample_id', 'group_sample']]
+                .to_csv(output.samples, sep='\t', index=False, header=None))
+
+
+rule update_sample_names:
+    input:
+        vcf=rules.glnexus.output.vcf,
+        samples=rules.create_reheader_sample_file.output.samples
     output:
         vcf='results/joint_calls/{joint_calling_group}.vcf.gz',
     params:
-        extra=get_joint_calling_group_samples
-    threads: config['bcftools_index']['threads']
+        extra='',
+        view_extra='-O z'
     wrapper:
-        "0.73.0/bio/bcftools/view"
+        "0.73.0/bio/bcftools/reheader"
 
 
 rule bcftools_merge:
