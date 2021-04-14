@@ -13,8 +13,7 @@ rule map_reads:
         extra=config['bwa_mem']['extra'],
         sort=config['bwa_mem']['sort'],             # Can be 'none', 'samtools' or 'picard'.
         sort_order=config['bwa_mem']['sort_order'],  # Can be 'queryname' or 'coordinate'.
-        sort_extra=config['bwa_mem']['sort_extra'],            # Extra args for samtools/picard.
-        write_index=True
+        sort_extra=config['bwa_mem']['sort_extra'] + ' --write-index',            # Extra args for samtools/picard.
     threads: config['bwa_mem']['threads']
     wrapper:
         "file:///home/nikos/src/snakemake-wrappers/bio/bwa/mem"
