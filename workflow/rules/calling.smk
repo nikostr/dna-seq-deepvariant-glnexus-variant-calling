@@ -5,7 +5,10 @@ rule deepvariant:
         ref=rules.get_genome.output,
         ref_idx=rules.genome_faidx.output
     output:
-        vcf="results/calls/{sample}.vcf.gz"
+        vcf="results/calls/{sample}.vcf.gz",
+        report=report("results/calls/{sample}.visual_report.html",
+                caption='../report/vcf.rst',
+                category='Calls'),
     params:
         model=config['deepvariant']['model'],
         extra=config['deepvariant']['extra']
@@ -26,6 +29,9 @@ rule deepvariant_gvcf:
         ref_idx=rules.genome_faidx.output
     output:
         vcf="results/individual_calls/{sample}.vcf.gz",
+        report=report("results/individual_calls/{sample}.visual_report.html",
+                caption='../report/vcf.rst',
+                category='Calls'),
         gvcf="results/individual_calls/{sample}.g.vcf.gz"
     params:
         model=config['deepvariant_gvcf']['model'],
