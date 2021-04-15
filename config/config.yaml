@@ -56,3 +56,6 @@ bcftools_index:
 
 bcftools_merge:
   params: '--force-samples'
+
+bcftools_filter:
+  filter: ''

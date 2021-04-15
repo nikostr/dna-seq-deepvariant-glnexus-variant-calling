@@ -125,8 +125,22 @@ rule bcftools_merge:
                 joint_calling_group=joint_calling_group_lists.index)
             ]
     output:
-        "results/merged_calls/all.bcf"
+        calls=temp("results/merged_calls/all.unfiltered.bcf")
     params:
         config['bcftools_merge']['params']  # optional parameters for bcftools concat (except -o)
     wrapper:
         "0.73.0/bio/bcftools/merge"
+
+
+rule bcf_filter_o_vcf:
+    input:
+        rules.bcftools_merge.output.calls
+    output:
+        "results/merged_calls/all.bcf"
+    log:
+        "log/{prefix}.filter.vcf.log",
+    params:
+        filter=config['bcftools_filter']['filter'],
+        extra="",
+    wrapper:
+        "0.73.0/bio/bcftools/filter"
