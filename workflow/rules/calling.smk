@@ -91,7 +91,8 @@ rule create_reheader_sample_file:
     run:
         (joint_calling_groups
                 .assign(group_sample=lambda x: x.group + ':' + x.sample_id)
-                .loc[:, ['sample_id', 'group_sample']]
+                .loc[lambda x: x.group==wildcards.joint_calling_group,
+                    ['sample_id', 'group_sample']]
                 .to_csv(output.samples, sep='\t', index=False, header=None))
 
 
@@ -132,13 +133,13 @@ rule bcftools_merge:
         "0.73.0/bio/bcftools/merge"
 
 
-rule bcf_filter_o_vcf:
+rule bcftools_filter:
     input:
         rules.bcftools_merge.output.calls
     output:
         "results/merged_calls/all.bcf"
     log:
-        "log/{prefix}.filter.vcf.log",
+        "logs/bcftools_filter_all.log",
     params:
         filter=config['bcftools_filter']['filter'],
         extra="",
