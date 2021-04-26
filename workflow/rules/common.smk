@@ -3,10 +3,6 @@ import pandas as pd
 import numpy as np
 import os
 
-# this container defines the underlying OS for each job when using the workflow
-# with --use-conda --use-singularity
-singularity: "docker://continuumio/miniconda3"
-
 ##### load config and sample sheets #####
 
 configfile: "config/config.yaml"
