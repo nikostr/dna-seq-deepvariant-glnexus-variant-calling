@@ -16,9 +16,7 @@ rule deepvariant:
     log:
         "results/logs/deepvariant/{sample}/stdout.log"
     wrapper:
-        'https://github.com/nikostr/snakemake-wrappers/raw/deepvariant-v1.1/bio/deepvariant'
-        #"file:///home/nikos/src/snakemake-wrappers/bio/deepvariant"
-        #"0.73.0/bio/deepvariant"
+        "0.74.0/bio/deepvariant"
 
 
 rule deepvariant_gvcf:
@@ -40,9 +38,7 @@ rule deepvariant_gvcf:
     log:
         "results/logs/deepvariant_gvcf/{sample}/stdout.log"
     wrapper:
-        'https://github.com/nikostr/snakemake-wrappers/raw/deepvariant-v1.1/bio/deepvariant'
-        #"file:///home/nikos/src/snakemake-wrappers/bio/deepvariant"
-        #"0.73.0/bio/deepvariant"
+        "0.74.0/bio/deepvariant"
 
 
 rule glnexus:
