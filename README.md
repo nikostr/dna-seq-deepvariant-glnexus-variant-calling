@@ -5,9 +5,6 @@
 
 This is a Snakemake pipeline implementing the [multi-sample variant calling with DeepVariant and GLnexus](https://github.com/google/deepvariant/blob/master/docs/trio-merge-case-study.md). It also allows for single-sample variant calling, and creating a merged vcf containing both individual call sets and merged call sets.
 
-This is the template for a new Snakemake workflow. Replace this text with a comprehensive description covering the purpose and domain.
-Insert your code into the respective folders, i.e. `scripts`, `rules`, and `envs`. Define the entry point of the workflow in the `Snakefile` and the main configuration in the `config.yaml` file.
-
 ## Authors
 
 * Nikos Tsardakas Renhuldt (@nikostr)
