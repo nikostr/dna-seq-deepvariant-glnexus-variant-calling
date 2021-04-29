@@ -135,7 +135,7 @@ rule bcftools_filter:
     output:
         "results/merged_calls/all.vcf.gz"
     log:
-        "logs/bcftools_filter_all.log",
+        "results/logs/bcftools_filter_all.log",
     params:
         filter=config['bcftools_filter']['filter'],
         extra="",
