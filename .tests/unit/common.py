@@ -30,7 +30,7 @@ class OutputChecker:
         for path, subdirs, files in os.walk(self.workdir):
             for f in files:
                 f = (Path(path) / f).relative_to(self.workdir)
-                if str(f).startswith(".snakemake") or str(f).startswith("config") or str(f).startswith("results/logs/"):
+                if str(f).startswith(".snakemake") or str(f).startswith("config") or str(f).startswith("results/logs/") or ".DB" in str(f):
                     continue
                 if f in expected_files:
                     self.compare_files(self.workdir / f, self.expected_path / f)
@@ -61,5 +61,8 @@ class VcfGzChecker(OutputChecker):
 
 
     def compare_files(self, generated_file, expected_file):
-        assert  self.calc_md5sum(generated_file) == self.calc_md5sum(expected_file), \
-                "md5sum of vcfs do not match"
+        if str(generated_file).endswith('vcf.gz'):
+            assert  self.calc_md5sum(generated_file) == self.calc_md5sum(expected_file), \
+                    "md5sum of vcfs do not match"
+        else:
+            sp.check_output(["cmp", generated_file, expected_file])
