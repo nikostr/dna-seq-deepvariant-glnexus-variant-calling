@@ -1,0 +1,8 @@
+group	sample_id	keep
+G1	C	false
+G1	D	true
+G2	C	false
+G2	E	true
+G3	C	true
+G3	D	false
+G3	E	false
