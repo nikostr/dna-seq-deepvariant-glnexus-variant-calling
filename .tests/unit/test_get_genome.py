@@ -32,7 +32,6 @@ def test_get_genome():
             "-m",
             "snakemake", 
             "resources/genome.fasta",
-            "-F", 
             "-j1",
             "--keep-target-files",
     

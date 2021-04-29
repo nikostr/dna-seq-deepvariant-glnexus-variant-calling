@@ -32,7 +32,6 @@ def test_bwa_index():
             "-m",
             "snakemake", 
             "resources/genome.fasta.amb",
-            "-F", 
             "-j1",
             "--keep-target-files",
     

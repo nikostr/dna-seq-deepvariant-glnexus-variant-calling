@@ -32,7 +32,6 @@ def test_fastp_pe():
             "-m",
             "snakemake", 
             "results/trimmed/A-1.1.fastq.gz",
-            "-F", 
             "-j1",
             "--keep-target-files",
     

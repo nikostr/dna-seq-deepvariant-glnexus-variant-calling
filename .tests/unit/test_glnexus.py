@@ -32,7 +32,6 @@ def test_glnexus():
             "-m",
             "snakemake", 
             "results/all_group_samples_joint_calls/G1.vcf.gz",
-            "-F", 
             "-j1",
             "--keep-target-files",
             "--notemp",

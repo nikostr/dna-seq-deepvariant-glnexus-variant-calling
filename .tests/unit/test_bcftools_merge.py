@@ -32,7 +32,6 @@ def test_bcftools_merge():
             "-m",
             "snakemake", 
             "results/merged_calls/all.unfiltered.vcf.gz",
-            "-F", 
             "-j1",
             "--keep-target-files",
     

@@ -32,7 +32,6 @@ def test_update_sample_names():
             "-m",
             "snakemake", 
             "results/joint_calls/G1.vcf.gz",
-            "-F", 
             "-j1",
             "--keep-target-files",
     
