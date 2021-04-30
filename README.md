@@ -1,7 +1,7 @@
 # Snakemake workflow: dna-seq-deepvariant-glnexus-variant-calling
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6-brightgreen.svg)](https://snakemake.bitbucket.io)
-[![Build Status](https://travis-ci.org/snakemake-workflows/dna-seq-deepvariant-glnexus-variant-calling.svg?branch=master)](https://travis-ci.org/snakemake-workflows/dna-seq-deepvariant-glnexus-variant-calling)
+[![Tests](https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling/actions/workflows/python-package-conda.yml)
 
 This is a Snakemake pipeline implementing the [multi-sample variant calling with DeepVariant and GLnexus](https://github.com/google/deepvariant/blob/master/docs/trio-merge-case-study.md). It also allows for single-sample variant calling, and creating a merged vcf containing both individual call sets and merged call sets.
 
