@@ -1,7 +1,3 @@
-"""
-Common code for unit testing of rules generated with Snakemake 6.2.1+1.g99d2517b.dirty.
-"""
-
 from pathlib import Path
 import subprocess as sp
 import os

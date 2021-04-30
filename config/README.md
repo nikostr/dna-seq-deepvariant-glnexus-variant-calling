@@ -1,5 +1,4 @@
 # General settings
-### Step 2: Configure workflow
 
 Adjust `config.yaml` to configure the workflow execution. The config files `samples.tsv`, `units.tsv`, and `joint_calling_groups.tsv` contain the following sample information:
 
