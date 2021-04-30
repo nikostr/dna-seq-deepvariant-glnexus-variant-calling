@@ -1,4 +1,4 @@
-name: Python Package using Conda
+name: Tests
 
 on:
   push:
@@ -64,5 +64,5 @@ jobs:
       uses: snakemake/snakemake-github-action@v1.17.0
       with:
         directory: .tests/integration
-        snakefile: Snakefile
+        snakefile: workflow/Snakefile
         args: --use-conda --show-failed-logs --cores 1 --conda-cleanup-pkgs cache
