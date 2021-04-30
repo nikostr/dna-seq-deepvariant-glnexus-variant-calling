@@ -28,6 +28,8 @@ rule samtools_merge:
     output:
         bam="results/mapped/{sample}.bam",
         idx="results/mapped/{sample}.bam.csi",
+    log:
+        "results/logs/samtools_merge/{sample}.log"
     params: config['samtools_merge']['params'] + ' --write-index' # optional additional parameters as string
     threads: config['samtools_merge']['threads'] # Samtools takes additional threads through its option -@
     wrapper:

@@ -56,7 +56,7 @@ rule glnexus:
     container:
         'docker://quay.io/mlin/glnexus:v1.3.1'
     shell:
-        '/usr/local/bin/glnexus_cli '
+        'glnexus_cli '
         '--config DeepVariantWGS '
         '--dir {output.scratch} '
         '--threads {threads} '
@@ -74,6 +74,8 @@ rule bcftools_index:
         "{vcffile}.vcf.gz.csi"
     params:
         extra=config['bcftools_index']['extra'] + ' --threads {}'.format(config['bcftools_index']['threads'])  # optional parameters for bcftools index
+    log:
+        "results/logs/bcftools_index/{vcffile}.log"
     threads: config['bcftools_index']['threads']
     wrapper:
         "0.73.0/bio/bcftools/index"
@@ -84,9 +86,11 @@ rule create_reheader_sample_file:
         joint_calling_groups=config['joint_calling_groups']
     output:
         samples=temp('results/joint_calls/{joint_calling_group}_sample_names.tsv')
+    log:
+        "results/logs/reheader_sample_file/{joint_calling_group}.log"
     run:
         (joint_calling_groups
-                .assign(group_sample=lambda x: x.group + ':' + x.sample_id)
+                .assign(group_sample=lambda x: x.group.str.cat(x.sample_id, sep=':'))
                 .loc[lambda x: x.group==wildcards.joint_calling_group,
                     ['sample_id', 'group_sample']]
                 .to_csv(output.samples, sep='\t', index=False, header=None))
@@ -98,6 +102,8 @@ rule update_sample_names:
         samples=rules.create_reheader_sample_file.output.samples
     output:
         vcf='results/joint_calls/{joint_calling_group}.vcf.gz',
+    log:
+        "results/logs/update_sample_names/{joint_calling_group}.log"
     params:
         extra='',
         view_extra='-O z'
@@ -129,6 +135,8 @@ rule bcftools_merge:
             ]
     output:
         calls=temp("results/merged_calls/all.unfiltered.vcf.gz")
+    log:
+        "results/logs/bcftools_merge/bcftools_merge.log"
     params:
         config['bcftools_merge']['params'] + ' -Oz'  # optional parameters for bcftools concat (except -o)
     wrapper:
