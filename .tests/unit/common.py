@@ -30,7 +30,13 @@ class OutputChecker:
         for path, subdirs, files in os.walk(self.workdir):
             for f in files:
                 f = (Path(path) / f).relative_to(self.workdir)
-                if str(f).startswith(".snakemake") or str(f).startswith("config") or str(f).startswith("results/logs/") or ".DB" in str(f) or str(f).endswith('.html'):
+                if (
+                    str(f).startswith(".snakemake")
+                    or str(f).startswith("config")
+                    or str(f).startswith("results/logs/")
+                    or ".DB" in str(f)
+                    or str(f).endswith(".html")
+                ):
                     continue
                 if f in expected_files:
                     self.compare_files(self.workdir / f, self.expected_path / f)
@@ -52,17 +58,17 @@ class OutputChecker:
 
 class VcfGzChecker(OutputChecker):
     def calc_md5sum(self, file):
-        with gzip.open(file, 'rt') as f:
-            return (hashlib.md5(
-                        "".join(
-                            [l for l in f.readlines() if not l.startswith("##")])
-                        .encode("utf-8"))
-                    .hexdigest())
-
+        with gzip.open(file, "rt") as f:
+            return hashlib.md5(
+                "".join([l for l in f.readlines() if not l.startswith("##")]).encode(
+                    "utf-8"
+                )
+            ).hexdigest()
 
     def compare_files(self, generated_file, expected_file):
-        if str(generated_file).endswith('vcf.gz'):
-            assert  self.calc_md5sum(generated_file) == self.calc_md5sum(expected_file), \
-                    "md5sum of vcfs do not match"
+        if str(generated_file).endswith("vcf.gz"):
+            assert self.calc_md5sum(generated_file) == self.calc_md5sum(
+                expected_file
+            ), "md5sum of vcfs do not match"
         else:
             sp.check_output(["cmp", generated_file, expected_file])
