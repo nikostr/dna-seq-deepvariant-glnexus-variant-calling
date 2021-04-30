@@ -3,9 +3,9 @@ units: 'config/units.tsv'
 joint_calling_groups: 'config/joint_calling_groups.tsv'
 
 ref:
-  species: 'oat'
-  build: 1
-  release: 1
+    species: 'saccharomyces_cerevisiae'
+    release: '98'
+    build: 'R64-1-1'
 
 bwa_index:
   mem_mb: 369000

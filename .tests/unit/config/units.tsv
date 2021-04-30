@@ -1,7 +1,0 @@
-sample_id	unit	platform	fq1	fq2
-A	1	ILLUMINA	.test/data/reads.1.fq.gz	.test/data/reads.2.fq.gz
-B	1	ILLUMINA	.test/data/reads.1.fq.gz	.test/data/reads.2.fq.gz
-B	2	ILLUMINA	.test/data/reads.1.fq.gz	
-C	1	ILLUMINA	.test/data/reads.1.fq.gz	.test/data/reads.2.fq.gz
-D	1	ILLUMINA	.test/data/reads.1.fq.gz	.test/data/reads.2.fq.gz
-E	1	ILLUMINA	.test/data/reads.1.fq.gz	.test/data/reads.2.fq.gz
