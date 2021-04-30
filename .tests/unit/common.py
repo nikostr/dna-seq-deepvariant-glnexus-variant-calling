@@ -36,6 +36,7 @@ class OutputChecker:
                     or str(f).startswith("results/logs/")
                     or ".DB" in str(f)
                     or str(f).endswith(".html")
+                    or str(f).endswith(".json")
                 ):
                     continue
                 if f in expected_files:
