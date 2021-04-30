@@ -1,6 +1,6 @@
-samples: 'samples.tsv'
-units: '.test/units.tsv'
-joint_calling_groups: '.test/joint_calling_groups.tsv'
+samples: 'config/samples.tsv'
+units: 'config/units.tsv'
+joint_calling_groups: 'config/joint_calling_groups.tsv'
 
 ref:
   species: 'oat'
