@@ -36,6 +36,8 @@ def test_get_genome():
                 "-j1",
                 "--keep-target-files",
                 "--use-conda",
+                "--conda-frontend",
+                "mamba",
                 "--use-singularity",
                 "--directory",
                 workdir,

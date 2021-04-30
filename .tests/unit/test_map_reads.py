@@ -39,6 +39,8 @@ def test_map_reads():
                 "-j1",
                 "--keep-target-files",
                 "--use-conda",
+                "--conda-frontend",
+                "mamba",
                 "--use-singularity",
                 "--directory",
                 workdir,

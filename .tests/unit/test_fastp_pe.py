@@ -39,6 +39,8 @@ def test_fastp_pe():
                 "-j1",
                 "--keep-target-files",
                 "--use-conda",
+                "--conda-frontend",
+                "mamba",
                 "--use-singularity",
                 "--directory",
                 workdir,

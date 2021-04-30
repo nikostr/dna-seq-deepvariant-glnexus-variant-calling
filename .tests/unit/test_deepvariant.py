@@ -38,6 +38,8 @@ def test_deepvariant():
                 "-j1",
                 "--keep-target-files",
                 "--use-conda",
+                "--conda-frontend",
+                "mamba",
                 "--use-singularity",
                 "--directory",
                 workdir,

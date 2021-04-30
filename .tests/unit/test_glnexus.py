@@ -40,6 +40,8 @@ def test_glnexus():
                 "--keep-target-files",
                 "--notemp",
                 "--use-conda",
+                "--conda-frontend",
+                "mamba",
                 "--use-singularity",
                 "--directory",
                 workdir,
