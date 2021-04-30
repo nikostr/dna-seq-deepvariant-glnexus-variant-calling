@@ -11,7 +11,7 @@ This is a Snakemake pipeline implementing the [multi-sample variant calling with
 
 ## Usage
 
-The usage of this workflow is described in the [Snakemake Workflow Catalog](https://varlociraptor.github.io/snakemake-workflow-catalog?usage=nikostr/dna-seq-deepvariant-glnexus-variant-calling).
+The usage of this workflow is described in the [Snakemake Workflow Catalog](https://snakemake.github.io/snakemake-workflow-catalog?usage=nikostr/dna-seq-deepvariant-glnexus-variant-calling).
 
 If you use this workflow in a paper, don't forget to give credits to the authors by citing the URL of this (original) repository and, if available, its DOI (see above).
 
