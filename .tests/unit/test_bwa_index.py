@@ -35,7 +35,7 @@ def test_bwa_index():
                 "python",
                 "-m",
                 "snakemake",
-                "resources/genome.fasta.amb",
+                "resources/genome.fasta.sa",
                 "-j1",
                 "--keep-target-files",
                 "--use-conda",
