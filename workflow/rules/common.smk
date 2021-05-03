@@ -54,3 +54,12 @@ def get_trimmed_reads(wildcards):
         )
     # single end sample
     return "results/trimmed/{sample}-{unit}.fastq.gz".format(**wildcards)
+
+
+def get_bwa_index(wildcards):
+    assert config["bwa_mem"]["wrapper"] in ["bwa/mem", "bwa-mem2/mem"], \
+            "BWA-MEM wrapper must be either bwa/mem or bwa-mem2/mem"
+    if config["bwa_mem"]["wrapper"] == "bwa/mem":
+        return "resources/genome.fasta.sa"
+    else:
+        return "resources/genome.fasta.0123"

@@ -1,22 +1,22 @@
 rule map_reads:
     input:
         reads=get_trimmed_reads,
-        idx=rules.bwa_index.output,
-        #add index dependecy as in https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/blob/master/rules/mapping.smk
+        idx=get_bwa_index,
     output:
         temp("results/mapped/{sample}-{unit}.sorted.bam"),
         temp("results/mapped/{sample}-{unit}.sorted.bam.csi"),
     log:
         "results/logs/bwa_mem/{sample}-{unit}.log",
     params:
-        index=lambda w, input: os.path.splitext(input.idx[0])[0],
+        index=lambda w, input: os.path.splitext(input.idx)[0],
         extra=config["bwa_mem"]["extra"],
         sort=config["bwa_mem"]["sort"],  # Can be 'none', 'samtools' or 'picard'.
         sort_order=config["bwa_mem"]["sort_order"],  # Can be 'queryname' or 'coordinate'.
         sort_extra=config["bwa_mem"]["sort_extra"] + " --write-index",  # Extra args for samtools/picard.
     threads: config["bwa_mem"]["threads"]
     wrapper:
-        "0.74.0/bio/bwa/mem"
+        #"0.74.0/bio/{}".format(config["bwa_mem"]["wrapper"])
+        "https://github.com/nikostr/snakemake-wrappers/raw/bwa-mem2/bio/{}".format(config["bwa_mem"]["wrapper"])
 
 
 rule samtools_merge:

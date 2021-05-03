@@ -37,3 +37,16 @@ rule bwa_index:
     cache: True
     wrapper:
         "0.73.0/bio/bwa/index"
+
+
+rule bwa_mem2_index:
+    input:
+        "resources/genome.fasta",
+    output:
+        multiext("resources/genome.fasta", ".0123", ".amb", ".ann", ".bwt.2bit.64", ".pac"),
+    log:
+        "results/logs/bwa-mem2_index.log"
+    cache: True
+    wrapper:
+        #"0.74.0/bio/bwa-mem2/index"
+        "https://github.com/nikostr/snakemake-wrappers/raw/bwa-mem2/bio/bwa-mem2/index"
