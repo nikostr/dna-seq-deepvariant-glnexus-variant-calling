@@ -57,8 +57,10 @@ def get_trimmed_reads(wildcards):
 
 
 def get_bwa_index(wildcards):
-    assert config["bwa_mem"]["wrapper"] in ["bwa/mem", "bwa-mem2/mem"], \
-            "BWA-MEM wrapper must be either bwa/mem or bwa-mem2/mem"
+    assert config["bwa_mem"]["wrapper"] in [
+        "bwa/mem",
+        "bwa-mem2/mem",
+    ], "BWA-MEM wrapper must be either bwa/mem or bwa-mem2/mem"
     if config["bwa_mem"]["wrapper"] == "bwa/mem":
         return "resources/genome.fasta.sa"
     else:

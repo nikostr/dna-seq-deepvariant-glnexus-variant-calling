@@ -83,7 +83,8 @@ rule bcftools_index:
     params:
         extra=config["bcftools_index"]["extra"] + " --threads {}".format(
             config["bcftools_index"]["threads"]
-        ),  # optional parameters for bcftools index
+        ),
+        # optional parameters for bcftools index
     log:
         "results/logs/bcftools_index/{vcffile}.log",
     threads: config["bcftools_index"]["threads"]

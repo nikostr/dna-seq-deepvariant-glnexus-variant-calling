@@ -43,9 +43,11 @@ rule bwa_mem2_index:
     input:
         "resources/genome.fasta",
     output:
-        multiext("resources/genome.fasta", ".0123", ".amb", ".ann", ".bwt.2bit.64", ".pac"),
+        multiext(
+            "resources/genome.fasta", ".0123", ".amb", ".ann", ".bwt.2bit.64", ".pac"
+        ),
     log:
-        "results/logs/bwa-mem2_index.log"
+        "results/logs/bwa-mem2_index.log",
     cache: True
     wrapper:
         #"0.74.0/bio/bwa-mem2/index"
