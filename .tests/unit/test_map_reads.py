@@ -44,6 +44,8 @@ def test_map_reads():
                 "--use-singularity",
                 "--directory",
                 workdir,
+                "--configfile",
+                "config/bwa_mem.yaml",
             ]
         )
 

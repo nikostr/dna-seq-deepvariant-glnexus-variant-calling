@@ -1,0 +1,2 @@
+bwa_mem:
+  wrapper: 'bwa/mem' # bwa/mem or bwa-mem2/mem
