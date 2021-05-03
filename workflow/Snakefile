@@ -1,6 +1,7 @@
 # The main entry point of your workflow.
 # After configuring, running snakemake -n in a clone of this repository should successfully execute a dry-run of the workflow.
 from snakemake.utils import min_version
+
 min_version("6.0")
 
 
@@ -9,8 +10,8 @@ report: "report/workflow.rst"
 
 rule all:
     input:
-        'results/merged_calls/all.vcf.gz',
-        'results/qc/multiqc.html',
+        "results/merged_calls/all.vcf.gz",
+        "results/qc/multiqc.html",
         # The first rule should define the default target files
         # Subsequent target rules can be specified below. They should start with all_*.
 

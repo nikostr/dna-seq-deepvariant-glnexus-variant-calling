@@ -33,7 +33,7 @@ rule bwa_index:
     log:
         "results/logs/bwa_index.log",
     resources:
-        mem_mb=config['bwa_index']['mem_mb'],
+        mem_mb=config["bwa_index"]["mem_mb"],
     cache: True
     wrapper:
         "0.73.0/bio/bwa/index"

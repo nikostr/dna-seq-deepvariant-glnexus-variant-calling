@@ -1,13 +1,14 @@
 rule fastqc:
     input:
         #"reads/{sample}.fastq"
-        unpack(get_fastq)
+        unpack(get_fastq),
     output:
         html="results/qc/fastqc/{sample}.html",
-        zip="results/qc/fastqc/{sample}_fastqc.zip" # the suffix _fastqc.zip is necessary for multiqc to find the file. If not using multiqc, you are free to choose an arbitrary filename
-    params: "--quiet"
+        zip="results/qc/fastqc/{sample}_fastqc.zip",  # the suffix _fastqc.zip is necessary for multiqc to find the file. If not using multiqc, you are free to choose an arbitrary filename
+    params:
+        "--quiet",
     log:
-        "results/logs/fastqc/{sample}.log"
+        "results/logs/fastqc/{sample}.log",
     threads: 1
     wrapper:
         "0.73.0/bio/fastqc"
@@ -15,14 +16,14 @@ rule fastqc:
 
 rule samtools_stats:
     input:
-        rules.samtools_merge.output.bam
+        rules.samtools_merge.output.bam,
     output:
-        "results/qc/samtools_stats/{sample}.txt"
+        "results/qc/samtools_stats/{sample}.txt",
     params:
-        extra="",                       # Optional: extra arguments.
-        region=""      # Optional: region string.
+        extra="",  # Optional: extra arguments.
+        region="",  # Optional: region string.
     log:
-        "results/logs/samtools_stats/{sample}.log"
+        "results/logs/samtools_stats/{sample}.log",
     wrapper:
         "0.73.0/bio/samtools/stats"
 

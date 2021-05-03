@@ -5,7 +5,10 @@ import os
 
 ##### load config and sample sheets #####
 
+
 configfile: "config/config.yaml"
+
+
 validate(config, schema="../schemas/config.schema.yaml")
 
 samples = pd.read_table(config["samples"]).set_index("sample_id", drop=False)
@@ -22,12 +25,10 @@ validate(units, schema="../schemas/units.schema.yaml")
 joint_calling_groups = pd.read_csv(config["joint_calling_groups"], sep="\t")
 validate(joint_calling_groups, schema="../schemas/joint_calling_groups.schema.yaml")
 # List of samples for each joint calling group
-joint_calling_group_lists = (joint_calling_groups
-        .groupby('group')
-        .sample_id
-        .apply(set))
+joint_calling_group_lists = joint_calling_groups.groupby("group").sample_id.apply(set)
 
 ## Helper functions
+
 
 def get_fastq(wildcards):
     """Get fastq files of given sample-unit."""
@@ -47,7 +48,9 @@ def get_trimmed_reads(wildcards):
     if not is_single_end(**wildcards):
         # paired-end sample
         return expand(
-            "results/trimmed/{sample}-{unit}.{group}.fastq.gz", group=[1, 2], **wildcards
+            "results/trimmed/{sample}-{unit}.{group}.fastq.gz",
+            group=[1, 2],
+            **wildcards
         )
     # single end sample
     return "results/trimmed/{sample}-{unit}.fastq.gz".format(**wildcards)
