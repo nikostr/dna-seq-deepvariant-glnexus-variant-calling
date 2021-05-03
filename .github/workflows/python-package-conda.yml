@@ -65,4 +65,4 @@ jobs:
       with:
         directory: .tests/integration
         snakefile: workflow/Snakefile
-        args: --use-conda --show-failed-logs --cores 1 --conda-cleanup-pkgs cache
+        args: --use-conda --conda-frontend mamba --use-singularity --show-failed-logs --cores 1 --conda-cleanup-pkgs cache
