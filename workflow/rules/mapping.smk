@@ -2,7 +2,6 @@ rule map_reads:
     input:
         reads=get_trimmed_reads,
         idx=rules.bwa_index.output,
-        #add index dependecy as in https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/blob/master/rules/mapping.smk
     output:
         temp("results/mapped/{sample}-{unit}.sorted.bam"),
         temp("results/mapped/{sample}-{unit}.sorted.bam.csi"),
