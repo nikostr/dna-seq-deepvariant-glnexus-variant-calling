@@ -12,8 +12,6 @@ rule all:
     input:
         "results/merged_calls/all.vcf.gz",
         "results/qc/multiqc.html",
-        # The first rule should define the default target files
-        # Subsequent target rules can be specified below. They should start with all_*.
 
 
 include: "rules/common.smk"

@@ -53,19 +53,24 @@ class OutputChecker:
         sp.check_output(["cmp", generated_file, expected_file])
 
 
-class VcfGzChecker(OutputChecker):
-    def calc_md5sum(self, file):
-        with gzip.open(file, "rt") as f:
-            return hashlib.md5(
-                "".join([l for l in f.readlines() if not l.startswith("##")]).encode(
-                    "utf-8"
-                )
-            ).hexdigest()
+def calc_md5sum(file):
+    with gzip.open(file, "rt") as f:
+        return hashlib.md5(
+            "".join([l for l in f.readlines() if not l.startswith("##")]).encode(
+                "utf-8"
+            )
+        ).hexdigest()
 
+
+def compare_vcfs(generated_file, expected_file):
+    assert calc_md5sum(generated_file) == calc_md5sum(
+        expected_file
+    ), "md5sum of vcfs do not match"
+
+
+class VcfGzChecker(OutputChecker):
     def compare_files(self, generated_file, expected_file):
         if str(generated_file).endswith("vcf.gz"):
-            assert self.calc_md5sum(generated_file) == self.calc_md5sum(
-                expected_file
-            ), "md5sum of vcfs do not match"
+            compare_vcfs(generated_file, expected_file)
         else:
             sp.check_output(["cmp", generated_file, expected_file])

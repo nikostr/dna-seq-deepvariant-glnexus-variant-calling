@@ -3,7 +3,7 @@
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6-brightgreen.svg)](https://snakemake.bitbucket.io)
 [![Tests](https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling/actions/workflows/python-package-conda.yml)
 
-This is a Snakemake pipeline implementing the [multi-sample variant calling with DeepVariant and GLnexus](https://github.com/google/deepvariant/blob/master/docs/trio-merge-case-study.md). It also allows for single-sample variant calling, and creating a merged vcf containing both individual call sets and merged call sets.
+This is a Snakemake workflow implementing the [multi-sample variant calling with DeepVariant and GLnexus](https://github.com/google/deepvariant/blob/master/docs/trio-merge-case-study.md). It also allows for single-sample variant calling, and creating a merged vcf containing both individual call sets and merged call sets.
 
 ## Authors
 
@@ -15,7 +15,7 @@ The usage of this workflow is described in the [Snakemake Workflow Catalog](http
 
 If you use this workflow in a paper, don't forget to give credits to the authors by citing the URL of this (original) repository and, if available, its DOI (see above).
 
-Of course, also make sure to credit the tools this pipeline uses:
+Of course, also make sure to credit the tools this workflow uses:
 
 
   - R. Poplin et al., “A universal SNP and small-indel variant caller using deep neural networks,” Nat Biotechnol, vol. 36, no. 10, pp. 983–987, Nov. 2018, doi: 10.1038/nbt.4235.
