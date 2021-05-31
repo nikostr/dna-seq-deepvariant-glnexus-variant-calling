@@ -50,5 +50,4 @@ rule bwa_mem2_index:
         "results/logs/bwa-mem2_index.log",
     cache: True
     wrapper:
-        #"0.74.0/bio/bwa-mem2/index"
-        "https://github.com/nikostr/snakemake-wrappers/raw/bwa-mem2/bio/bwa-mem2/index"
+        "master/bio/bwa-mem2/index"
