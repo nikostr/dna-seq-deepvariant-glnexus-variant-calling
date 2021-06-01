@@ -1,5 +1,6 @@
 # Snakemake workflow: dna-seq-deepvariant-glnexus-variant-calling
 
+[![DOI](https://zenodo.org/badge/355875057.svg)](https://zenodo.org/badge/latestdoi/355875057)
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6-brightgreen.svg)](https://snakemake.bitbucket.io)
 [![Tests](https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/nikostr/dna-seq-deepvariant-glnexus-variant-calling/actions/workflows/python-package-conda.yml)
 
@@ -13,7 +14,7 @@ This is a Snakemake workflow implementing the [multi-sample variant calling with
 
 The usage of this workflow is described in the [Snakemake Workflow Catalog](https://snakemake.github.io/snakemake-workflow-catalog?usage=nikostr/dna-seq-deepvariant-glnexus-variant-calling).
 
-If you use this workflow in a paper, don't forget to give credits to the authors by citing the URL of this (original) repository and, if available, its DOI (see above).
+If you use this workflow in a paper, don't forget to give credits to the authors by citing the URL of this (original) repository and its DOI (see above).
 
 Of course, also make sure to credit the tools this workflow uses:
 
