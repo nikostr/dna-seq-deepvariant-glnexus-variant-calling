@@ -21,6 +21,7 @@ Of course, also make sure to credit the tools this workflow uses:
   - R. Poplin et al., “A universal SNP and small-indel variant caller using deep neural networks,” Nat Biotechnol, vol. 36, no. 10, pp. 983–987, Nov. 2018, doi: 10.1038/nbt.4235.
   - T. Yun, H. Li, P.-C. Chang, M. F. Lin, A. Carroll, and C. Y. McLean, “Accurate, scalable cohort variant calls using DeepVariant and GLnexus,” Bioinformatics, vol. 36, no. 24, pp. 5582–5589, Apr. 2021, doi: 10.1093/bioinformatics/btaa1081.
   - H. Li, “Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM,” arXiv:1303.3997 [q-bio], May 2013, Accessed: Apr. 27, 2021. [Online]. Available: http://arxiv.org/abs/1303.3997.
+  - Vasimuddin Md, Sanchit Misra, Heng Li, Srinivas Aluru, "Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems," IEEE Parallel and Distributed Processing Symposium (IPDPS), 2019.
   - A. D. Yates et al., “Ensembl 2020,” Nucleic Acids Research, p. gkz966, Nov. 2019, doi: 10.1093/nar/gkz966.
   - S. Chen, Y. Zhou, Y. Chen, and J. Gu, “fastp: an ultra-fast all-in-one FASTQ preprocessor,” Bioinformatics, vol. 34, no. 17, pp. i884–i890, Sep. 2018, doi: 10.1093/bioinformatics/bty560.
   - S. Andrews, FastQC: A Quality Control tool for High Throughput Sequence Data. .
