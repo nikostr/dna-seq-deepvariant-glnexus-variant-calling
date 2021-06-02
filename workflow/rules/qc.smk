@@ -11,7 +11,7 @@ rule fastqc:
         "results/logs/fastqc/{sample}.log",
     threads: 1
     wrapper:
-        "0.73.0/bio/fastqc"
+        "0.75.0/bio/fastqc"
 
 
 rule samtools_stats:
@@ -25,7 +25,7 @@ rule samtools_stats:
     log:
         "results/logs/samtools_stats/{sample}.log",
     wrapper:
-        "0.73.0/bio/samtools/stats"
+        "0.75.0/bio/samtools/stats"
 
 
 rule multiqc:
@@ -47,4 +47,4 @@ rule multiqc:
     log:
         "results/logs/multiqc.log",
     wrapper:
-        "0.73.0/bio/multiqc"
+        "0.75.0/bio/multiqc"

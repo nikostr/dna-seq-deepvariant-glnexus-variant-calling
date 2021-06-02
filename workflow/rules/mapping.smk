@@ -15,7 +15,7 @@ rule map_reads:
         sort_extra=config["bwa_mem"]["sort_extra"] + " --write-index",  # Extra args for samtools/picard.
     threads: config["bwa_mem"]["threads"]
     wrapper:
-        "master/bio/{}".format(config["bwa_mem"]["wrapper"])
+        "0.75.0/bio/{}".format(config["bwa_mem"]["wrapper"])
 
 
 rule samtools_merge:
@@ -34,4 +34,4 @@ rule samtools_merge:
         config["samtools_merge"]["params"] + " --write-index",  # optional additional parameters as string
     threads: config["samtools_merge"]["threads"]  # Samtools takes additional threads through its option -@
     wrapper:
-        "0.73.0/bio/samtools/merge"
+        "0.75.0/bio/samtools/merge"

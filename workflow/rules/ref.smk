@@ -10,7 +10,7 @@ rule get_genome:
         release=config["ref"]["release"],
     cache: True
     wrapper:
-        "0.73.0/bio/reference/ensembl-sequence"
+        "0.75.0/bio/reference/ensembl-sequence"
 
 
 rule genome_faidx:
@@ -22,7 +22,7 @@ rule genome_faidx:
         "results/logs/genome-faidx.log",
     cache: True
     wrapper:
-        "0.73.0/bio/samtools/faidx"
+        "0.75.0/bio/samtools/faidx"
 
 
 rule bwa_index:
@@ -36,7 +36,7 @@ rule bwa_index:
         mem_mb=config["bwa_index"]["mem_mb"],
     cache: True
     wrapper:
-        "0.73.0/bio/bwa/index"
+        "0.75.0/bio/bwa/index"
 
 
 rule bwa_mem2_index:
@@ -50,4 +50,4 @@ rule bwa_mem2_index:
         "results/logs/bwa-mem2_index.log",
     cache: True
     wrapper:
-        "master/bio/bwa-mem2/index"
+        "0.75.0/bio/bwa-mem2/index"

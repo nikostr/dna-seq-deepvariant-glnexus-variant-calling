@@ -18,7 +18,7 @@ rule deepvariant:
     log:
         "results/logs/deepvariant/{sample}/stdout.log",
     wrapper:
-        "0.74.0/bio/deepvariant"
+        "0.75.0/bio/deepvariant"
 
 
 rule deepvariant_gvcf:
@@ -42,7 +42,7 @@ rule deepvariant_gvcf:
     log:
         "results/logs/deepvariant_gvcf/{sample}/stdout.log",
     wrapper:
-        "0.74.0/bio/deepvariant"
+        "0.75.0/bio/deepvariant"
 
 
 rule glnexus:
@@ -88,7 +88,7 @@ rule bcftools_index:
         "results/logs/bcftools_index/{vcffile}.log",
     threads: config["bcftools_index"]["threads"]
     wrapper:
-        "0.73.0/bio/bcftools/index"
+        "0.75.0/bio/bcftools/index"
 
 
 rule create_reheader_sample_file:
@@ -123,7 +123,7 @@ rule update_sample_names:
         extra="",
         view_extra="-O z",
     wrapper:
-        "0.73.0/bio/bcftools/reheader"
+        "0.75.0/bio/bcftools/reheader"
 
 
 rule bcftools_merge:
@@ -179,7 +179,7 @@ rule bcftools_merge:
     params:
         config["bcftools_merge"]["params"] + " -Oz",  # optional parameters for bcftools concat (except -o)
     wrapper:
-        "0.73.0/bio/bcftools/merge"
+        "0.75.0/bio/bcftools/merge"
 
 
 rule bcftools_filter:
@@ -193,4 +193,4 @@ rule bcftools_filter:
         filter=config["bcftools_filter"]["filter"],
         extra="",
     wrapper:
-        "0.73.0/bio/bcftools/filter"
+        "0.75.0/bio/bcftools/filter"
