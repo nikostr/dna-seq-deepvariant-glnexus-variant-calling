@@ -46,14 +46,7 @@ def test_integration():
         )
 
         try:
-            common.compare_vcfs(
-                    workdir / target,
-                    expected_path / target
-                    )
+            common.compare_vcfs(workdir / target, expected_path / target)
         except AssertionError:
-            common.show_file_diff(
-                    workdir / target,
-                    expected_path / target
-                    )
+            common.show_file_diff(workdir / target, expected_path / target)
             raise
-
