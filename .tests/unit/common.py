@@ -74,7 +74,7 @@ def show_file_diff(generated_file, expected_file):
     file_contents = []
     for file in [generated_file, expected_file]:
         with gzip.open(file, "rt") as f:
-            file_contents.append(f.read_lines())
+            file_contents.append(f.readlines())
 
     sys.stderr.writelines(unified_diff(*file_contents,
         fromfile="generated file",
