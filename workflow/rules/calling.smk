@@ -134,7 +134,8 @@ rule bcftools_merge:
                 sample=(
                     samples.loc[
                         ~samples.sample_id.isin(joint_calling_groups.sample_id)
-                    ].index
+                    ].sample_id
+                    .unique()
                 ),
             ),
             *expand(
@@ -142,7 +143,8 @@ rule bcftools_merge:
                 sample=(
                     samples.loc[
                         samples.sample_id.isin(joint_calling_groups.sample_id)
-                    ].index
+                    ].sample_id
+                    .unique()
                 ),
             ),
             *expand(
@@ -156,7 +158,8 @@ rule bcftools_merge:
                 sample=(
                     samples.loc[
                         ~samples.sample_id.isin(joint_calling_groups.sample_id)
-                    ].index
+                    ].sample_id
+                    .unique()
                 ),
             ),
             *expand(
@@ -164,7 +167,8 @@ rule bcftools_merge:
                 sample=(
                     samples.loc[
                         samples.sample_id.isin(joint_calling_groups.sample_id)
-                    ].index
+                    ].sample_id
+                    .unique()
                 ),
             ),
             *expand(

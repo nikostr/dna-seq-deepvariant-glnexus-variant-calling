@@ -1,7 +1,0 @@
-sample_id	unit	fq1	fq2
-A	1	.tests/data/reads.1.fq.gz	.tests/data/reads.2.fq.gz
-B	1	.tests/data/reads.1.fq.gz	.tests/data/reads.2.fq.gz
-B	2	.tests/data/reads.1.fq.gz	
-C	1	.tests/data/reads.1.fq.gz	.tests/data/reads.2.fq.gz
-D	1	.tests/data/reads.1.fq.gz	.tests/data/reads.2.fq.gz
-E	1	.tests/data/reads.1.fq.gz	.tests/data/reads.2.fq.gz
