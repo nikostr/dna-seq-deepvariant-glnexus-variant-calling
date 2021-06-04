@@ -1,8 +1,10 @@
 from pathlib import Path
 import subprocess as sp
 import os
+import sys
 import hashlib
 import gzip
+from difflib import unified_diff
 
 
 class OutputChecker:
@@ -66,6 +68,17 @@ def compare_vcfs(generated_file, expected_file):
     assert calc_md5sum(generated_file) == calc_md5sum(
         expected_file
     ), "md5sum of vcfs do not match"
+
+
+def show_file_diff(generated_file, expected_file):
+    file_contents = []
+    for file in [generated_file, expected_file]:
+        with gzip.open(file, "rt") as f:
+            file_contents.append(f.readlines())
+
+    sys.stderr.writelines(
+        unified_diff(*file_contents, fromfile="generated file", tofile="expected file")
+    )
 
 
 class VcfGzChecker(OutputChecker):

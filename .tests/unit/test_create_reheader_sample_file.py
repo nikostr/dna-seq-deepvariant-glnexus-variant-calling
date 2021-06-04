@@ -16,7 +16,9 @@ def test_create_reheader_sample_file():
     with TemporaryDirectory() as tmpdir:
         workdir = Path(tmpdir) / "workdir"
         data_path = PurePosixPath(".tests/unit/create_reheader_sample_file/data")
-        expected_path = PurePosixPath(".tests/unit/create_reheader_sample_file/expected")
+        expected_path = PurePosixPath(
+            ".tests/unit/create_reheader_sample_file/expected"
+        )
         config_path = PurePosixPath(".tests/unit/config")
 
         # Copy data to the temporary workdir.

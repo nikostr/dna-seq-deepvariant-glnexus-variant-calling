@@ -45,7 +45,7 @@ def test_map_reads():
                 "--directory",
                 workdir,
                 "--configfile",
-                "config/bwa_mem.yaml",
+                workdir / "config/bwa_mem.yaml",
             ]
         )
 

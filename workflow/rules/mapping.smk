@@ -23,7 +23,7 @@ rule samtools_merge:
         lambda w: expand(
             "results/mapped/{sample}-{unit}.sorted.bam",
             sample=w.sample,
-            unit=units.loc[w.sample].unit,
+            unit=samples.loc[w.sample].unit,
         ),
     output:
         bam="results/mapped/{sample}.bam",

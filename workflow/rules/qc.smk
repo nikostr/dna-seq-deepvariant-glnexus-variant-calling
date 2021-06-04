@@ -32,11 +32,11 @@ rule multiqc:
     input:
         expand(
             [
-                "results/qc/samtools_stats/{u.sample_id}.txt",
-                "results/qc/fastqc/{u.sample_id}-{u.unit}.zip",
-                "results/qc/fastp/{u.sample_id}-{u.unit}.json",
+                "results/qc/samtools_stats/{s.sample_id}.txt",
+                "results/qc/fastqc/{s.sample_id}-{s.unit}.zip",
+                "results/qc/fastp/{s.sample_id}-{s.unit}.json",
             ],
-            u=units.itertuples(),
+            s=samples.itertuples(),
         ),
     output:
         report(
