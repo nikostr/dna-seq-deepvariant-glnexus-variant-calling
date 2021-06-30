@@ -32,23 +32,16 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Setup snakemake
+      run: |
+        mamba install -c conda-forge -c bioconda pytest snakemake singularity snakefmt
+    - name: Lint with snakemake and snakefmt
+      run: |
+        snakemake --lint
+        snakefmt workflow
     - name: Unit tests
       run: |
-        mamba install -c conda-forge -c bioconda pytest snakemake singularity
         pytest .tests/unit
     - name: Integration test
       run: |
         pytest .tests/integration
-
-  linting:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@2.0.0
-    - name: Linting
-      uses: snakemake/snakemake-github-action@v1.17.0
-      with:
-        directory: .
-        snakefile: workflow/Snakefile
-        args: --lint
