@@ -30,8 +30,13 @@ rule samtools_stats:
 rule multiqc:
     input:
         expand("results/qc/samtools_stats/{s.sample_id}.txt", s=samples.itertuples()),
-        expand("results/qc/fastqc/{s.sample_id}-{s.unit}_fastqc.zip", s=samples.itertuples()),
-        expand("results/qc/fastp/{s.sample_id}-{s.unit}_fastp.json", s=samples.itertuples()),
+        expand(
+            "results/qc/fastqc/{s.sample_id}-{s.unit}_fastqc.zip",
+            s=samples.itertuples(),
+        ),
+        expand(
+            "results/qc/fastp/{s.sample_id}-{s.unit}_fastp.json", s=samples.itertuples()
+        ),
     output:
         report(
             "results/qc/multiqc.html",
