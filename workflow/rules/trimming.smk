@@ -1,10 +1,13 @@
+ruleorder: fastp_pe > fastp_se
+
+
 rule fastp_se:
     input:
         unpack(get_fastq),
     output:
         trimmed="results/trimmed/{sample}-{unit}.fastq.gz",
         html="results/qc/fastp/{sample}-{unit}.html",
-        json="results/qc/fastp/{sample}-{unit}.json",
+        json="results/qc/fastp/{sample}-{unit}_fastp.json",
     log:
         "results/logs/fastp/{sample}-{unit}.log",
     params:
@@ -24,7 +27,7 @@ rule fastp_pe:
             "results/trimmed/{sample}-{unit}.2.fastq.gz",
         ],
         html="results/qc/fastp/{sample}-{unit}.html",
-        json="results/qc/fastp/{sample}-{unit}.json",
+        json="results/qc/fastp/{sample}-{unit}_fastp.json",
     log:
         "results/logs/fastp/{sample}-{unit}.log",
     params:
