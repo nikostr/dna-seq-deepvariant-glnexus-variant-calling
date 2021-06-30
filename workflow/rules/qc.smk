@@ -8,7 +8,7 @@ rule fastqc:
         "--quiet",
     log:
         "results/logs/fastqc/{sample}-{unit}.log",
-    threads: 1
+    threads: 14
     wrapper:
         "0.75.0/bio/fastqc"
 
