@@ -1,15 +1,14 @@
 rule fastqc:
     input:
-        #"reads/{sample}.fastq"
         unpack(get_fastq),
     output:
-        html="results/qc/fastqc/{sample}.html",
-        zip="results/qc/fastqc/{sample}_fastqc.zip",  # the suffix _fastqc.zip is necessary for multiqc to find the file. If not using multiqc, you are free to choose an arbitrary filename
+        html="results/qc/fastqc/{sample}-{unit}.html",
+        zip="results/qc/fastqc/{sample}-{unit}_fastqc.zip",
     params:
         "--quiet",
     log:
-        "results/logs/fastqc/{sample}.log",
-    threads: 1
+        "results/logs/fastqc/{sample}-{unit}.log",
+    threads: 14
     wrapper:
         "0.75.0/bio/fastqc"
 
@@ -30,14 +29,9 @@ rule samtools_stats:
 
 rule multiqc:
     input:
-        expand(
-            [
-                "results/qc/samtools_stats/{s.sample_id}.txt",
-                "results/qc/fastqc/{s.sample_id}-{s.unit}.zip",
-                "results/qc/fastp/{s.sample_id}-{s.unit}.json",
-            ],
-            s=samples.itertuples(),
-        ),
+        expand("results/qc/samtools_stats/{s.sample_id}.txt", s=samples.itertuples()),
+        expand("results/qc/fastqc/{s.sample_id}-{s.unit}_fastqc.zip", s=samples.itertuples()),
+        expand("results/qc/fastp/{s.sample_id}-{s.unit}_fastp.json", s=samples.itertuples()),
     output:
         report(
             "results/qc/multiqc.html",
